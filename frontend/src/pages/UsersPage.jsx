@@ -1,8 +1,24 @@
-import { SquarePen, Trash2 } from 'lucide-react'
-import React from 'react'
+import { SquarePen, Trash2, X } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import AuthUser from '../Auth/AuthUser'
+import { IMG_URL } from '../helper/url_helper';
 
 const UsersPage = () => {
 
+  const { http } = AuthUser();
+  const [getuser, setGetuser] = useState([])
+
+  const getUsers = async () => {
+
+    await http.get("/user/list").then((res) => {
+      setGetuser(res.data)
+    })
+
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, [])
 
   return (
 
@@ -26,6 +42,8 @@ const UsersPage = () => {
         </button>
 
       </div>
+
+
 
 
 
@@ -79,54 +97,55 @@ const UsersPage = () => {
 
             <tbody>
 
-              <tr>
-                <td className="px-6 py-4 text-center">1</td>
+              {getuser.map((item, index) => (
+                <tr key={item._id}>
+                  <td className="px-6 py-4 text-center">{index + 1}</td>
 
-                <td className="px-6 py-4 text-center">
-                  <div className="font-medium text-gray-800">
-                    Aditya Tilekar
-                  </div>
-                </td>
+                  <td className="px-6 py-4 text-center">
+                    <div className="font-medium text-gray-800">
+                      {item.fullname}
+                    </div>
+                  </td>
 
-                <td className="px-6 py-4 text-center text-gray-600">
-                  aditya@gmail.com
-                </td>
-                <td className="px-6 py-4 text-center text-gray-600">
-                  image
-                </td>
+                  <td className="px-6 py-4 text-center text-gray-600">
+                    {item.email}
+                  </td>
+                  <td className="px-6 py-4 text-center rounded text-gray-600">
+                    <img src={IMG_URL + "" + item.image} alt={item.fullname} />
+                  </td>
 
-                <td className="px-6 py-4 text-center text-gray-600">
-                  9876543210
-                </td>
+                  <td className="px-6 py-4 text-center text-gray-600">
+                    {item.number}
+                  </td>
 
-                <td className="px-6 py-4 text-center">
-                  <span className="rounded-md bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700">
-                    pune
-                  </span>
-                </td>
+                  <td className="px-6 py-4 text-center">
+                    <span className="rounded-md bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700">
+                      {item.address}
+                    </span>
+                  </td>
 
-                <td className="px-6 py-4 text-center">
-                  <span className="rounded-md bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                    Active
-                  </span>
-                </td>
+                  <td className="px-6 py-4 text-center">
+                    <span className="rounded-md bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                      {item.status ? "Active" : "InActive"}
+                    </span>
+                  </td>
 
-                <td className="px-6 py-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
+                  <td className="px-6 py-4 text-center">
+                    <div className="flex items-center justify-center gap-2">
 
-                    <button className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100">
-                      <SquarePen size={15} />
-                      Edit
-                    </button>
+                      <button className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100">
+                        <SquarePen size={15} />
+                        Edit
+                      </button>
 
-                    <button className="flex items-center gap-1.5 rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100">
-                      <Trash2 size={15} />
-                      Delete
-                    </button>
+                      <button className="flex items-center gap-1.5 rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100">
+                        <Trash2 size={15} />
+                        Delete
+                      </button>
 
-                  </div>
-                </td>
-              </tr>
+                    </div>
+                  </td>
+                </tr>))}
 
 
             </tbody>
