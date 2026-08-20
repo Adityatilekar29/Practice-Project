@@ -37,14 +37,18 @@ export default function App() {
               key={item.key}
               onClick={() => setActiveTab(item.key)}
               className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm mb-1 text-left ${
-                isActive ? "bg-indigo-600 text-white" : "hover:bg-white/5 text-slate-300"
+                isActive
+                  ? "bg-indigo-600 text-white"
+                  : "hover:bg-white/5 text-slate-300"
               }`}
             >
               <Icon size={16} /> {item.label}
             </button>
           );
         })}
-        <div className="mt-auto px-3 py-2 text-xs text-slate-500">v1.0 · frontend only</div>
+        <div className="mt-auto px-3 py-2 text-xs text-slate-500">
+          v1.0 · frontend only
+        </div>
       </aside>
 
       <div className="flex-1 min-w-0 p-6">
