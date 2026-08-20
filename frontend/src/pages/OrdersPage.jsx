@@ -47,31 +47,31 @@ const OrdersPage = () => {
                 </th>
 
                 <th className="px-6 py-4 text-sm font-semibold text-gray-600">
-                  Name
+                  customer_name
                 </th>
 
                 <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
-                  Email
+                  product_name
                 </th>
                 <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
-                  Image
+                  product_Image
                 </th>
 
                 <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
-                  Phone
+                  amount
                 </th>
 
-                <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
-                  Address
-                </th>
+                
 
                 <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
                   Status
                 </th>
 
-                <th className="px-6 py-4 text-center text-sm font-semibold text-gray-600">
+                <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
                   Action
                 </th>
+
+               
               </tr>
             </thead>
 
@@ -87,22 +87,17 @@ const OrdersPage = () => {
                 </td>
 
                 <td className="px-6 py-4 text-center text-gray-600">
-                  aditya@gmail.com
+                 Condom
                 </td>
                 <td className="px-6 py-4 text-center text-gray-600">
-                  image
+                  🤤
                 </td>
 
                 <td className="px-6 py-4 text-center text-gray-600">
-                  9876543210
+                 30
                 </td>
 
-                <td className="px-6 py-4 text-center">
-                  <span className="rounded-md bg-purple-100 px-3 py-1 text-xs font-semibold text-purple-700">
-                    pune
-                  </span>
-                </td>
-
+                
                 <td className="px-6 py-4 text-center">
                   <span className="rounded-md bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
                     Active
