@@ -6,10 +6,23 @@ const OrdersPage = () => {
 
 
       <div >
-        <div className="box h-30 text-white bg-gray-400 mt-40">
+        <div className="box h-30 text-white bg-gray-400 ">
 
-          <button >Add Order</button>
+          <button>Add Order</button>
           
+          </div>
+
+          <div>
+
+         <table>
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+         </table>
+
+
           </div>
       </div>
 
