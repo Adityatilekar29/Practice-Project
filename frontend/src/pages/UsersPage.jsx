@@ -2,6 +2,8 @@ import { SquarePen, Trash2 } from 'lucide-react'
 import React from 'react'
 
 const UsersPage = () => {
+
+
   return (
 
     <div className="page-content w-full min-h-screen bg-gray-50 p-6">
