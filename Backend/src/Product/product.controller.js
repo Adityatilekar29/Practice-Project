@@ -19,7 +19,7 @@ const store = async (req, res) => {
       product_name,
       product_description,
       product_prize,
-      product_image,
+      product_image: req.file.filename,
     });
     if (!save) {
       return res.jaon({
@@ -30,7 +30,7 @@ const store = async (req, res) => {
       product_name,
       product_description,
       product_prize,
-      product_image,
+      product_image: req.file.filename,
     });
   } catch (error) {
     console.log(error);
