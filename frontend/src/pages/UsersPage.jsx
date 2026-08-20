@@ -2,8 +2,14 @@ import React from 'react'
 
 const UsersPage = () => {
   return (
-    <div>
-      Hello Users
+
+    <div className='page-content'>
+
+      <Container fluid>
+
+      </Container>
+
+
     </div>
   )
 }
