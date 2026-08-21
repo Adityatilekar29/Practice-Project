@@ -1,12 +1,12 @@
 const ordermodel = require ("./order.model")
 
 
-const index = (req,res)=>{
+const index = async (req,res)=>{
     
 
     try {
 
-        const listdata = ordermodel.find()
+        const listdata = await ordermodel.find()
 
         res.json(listdata)
         
@@ -46,7 +46,7 @@ const store= async(req,res)=>{
             product_name,
             amount,
             status,
-            product_image:req.file.filename
+            order_image:req.file.filename
 
         })
         
@@ -113,7 +113,7 @@ const updated = async(req,res)=>{
         },{new:true})
 
         if(req.file){
-            updatedata.product_image= req.file.filename
+            updatedata.order_image= req.file.filename
             await updatedata.save()
         }
 
@@ -130,12 +130,12 @@ const updated = async(req,res)=>{
 }
 
 
-const deleted = (req,res)=>{
+const deleted = async(req,res)=>{
     try {
 
         const {id} = req.params
 
-        const deletedata = ordermodel.deleteOne({_id:id})
+        const deletedata =await ordermodel.deleteOne({_id:id})
 
         return req.json(deletedata)
         

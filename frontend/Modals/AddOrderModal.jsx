@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import AuthUser from '../src/Auth/AuthUser'
 
-const AddOrderModal = ({ShowModal,setShowModal,order,setorder}) => {
+const AddOrderModal = ({ShowModal,setShowModal,order,setorder,isRefresh,setisRefresh}) => {
 
 if(!ShowModal){
   return null
@@ -22,11 +22,14 @@ if(!ShowModal){
       setorder(res.data)
       setShowModal(false)
 
+    setisRefresh(isRefresh+1)
+      
+
 
     })
 
     setShowModal(false)
-
+     
 
 
          
@@ -139,13 +142,14 @@ if(!ShowModal){
             <div className="sm:col-span-2">
 
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Product Image
+                Order Image
               </label>
 
               <input
                 type="file"
                 accept="image/*"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm"
+                onChange={(e) => setorder({ ...order, order_image: e.target.files[0] })}
               />
 
             </div>
