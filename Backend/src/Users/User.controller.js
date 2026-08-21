@@ -75,8 +75,8 @@ const updated = async (req, res) => {
 
     update.fullname = fullname,
         update.email = email,
-        update.image = req.file.filename,
-        update.address = address,
+        update.image = req.file ? req.file.filename : update.image;
+    update.address = address,
         update.number = number,
         update.status = status,
         update.save();
