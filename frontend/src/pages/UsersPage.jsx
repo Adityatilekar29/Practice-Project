@@ -2,11 +2,15 @@ import { SquarePen, Trash2, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import AuthUser from '../Auth/AuthUser'
 import { IMG_URL } from '../helper/url_helper';
+import UserModal from '../../Modals/UserModal';
 
 const UsersPage = () => {
 
   const { http } = AuthUser();
   const [getuser, setGetuser] = useState([])
+
+  const [showModal, setShowModal] = useState(false)
+  const [isRefresh, setIsRefresh] = useState(0)
 
   const getUsers = async () => {
 
@@ -18,7 +22,30 @@ const UsersPage = () => {
 
   useEffect(() => {
     getUsers();
-  }, [])
+  }, [isRefresh])
+
+
+  const [addUser, setAddUser] = useState({
+    fullname: "",
+    email: "",
+    image: "",
+    address: "",
+    number: "",
+    status: "",
+  })
+
+  const deleteuser = async (id) => {
+    try {
+      const res = await http.delete(`/user/delete/${id}`);
+
+      console.log(res.data);
+
+      setIsRefresh((prev) => prev + 1);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
 
@@ -37,13 +64,19 @@ const UsersPage = () => {
           </p>
         </div>
 
-        <button className="rounded bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700 hover:shadow-md">
+        <button onClick={() => setShowModal(true)} className="rounded bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-700 hover:shadow-md">
           + Add User
         </button>
 
       </div>
 
-
+      <UserModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        setAddUser={setAddUser}
+        addUser={addUser}
+        setIsRefresh={setIsRefresh}
+      />
 
 
 
@@ -125,20 +158,34 @@ const UsersPage = () => {
                   </td>
 
                   <td className="px-6 py-4 text-center">
-                    <span className="rounded-md bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                      {item.status ? "Active" : "InActive"}
+                    <span
+                      className={`rounded-md px-3 py-1 text-xs font-semibold ${item.status
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                        }`}
+                    >
+                      {item.status ? "Active" : "Inactive"}
                     </span>
                   </td>
 
                   <td className="px-6 py-4 text-center">
                     <div className="flex items-center justify-center gap-2">
 
-                      <button className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100">
+                      <button onClick={() => { setAddUser(item); setShowModal(true) }} className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100">
                         <SquarePen size={15} />
                         Edit
                       </button>
 
-                      <button className="flex items-center gap-1.5 rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100">
+                      <button
+                        onClick={() => {
+                          const confirmDelete = window.confirm("Are you sure you want to delete?");
+
+                          if (confirmDelete) {
+                            deleteuser(item._id);
+                          }
+                        }}
+                        className="flex items-center gap-1.5 rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100"
+                      >
                         <Trash2 size={15} />
                         Delete
                       </button>
