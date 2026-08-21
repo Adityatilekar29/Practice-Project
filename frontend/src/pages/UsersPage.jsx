@@ -11,7 +11,7 @@ const UsersPage = () => {
   const [showModal, setShowModal] = useState(false)
   const [isRefresh, setIsRefresh] = useState(0)
 
-  const getUsers = async () => {  
+  const getUsers = async () => {
     await http.get("/user/list").then((res) => {
       setGetuser(res.data);
     });

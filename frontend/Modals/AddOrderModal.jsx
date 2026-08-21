@@ -1,69 +1,70 @@
 import React, { useState } from 'react'
 import AuthUser from '../src/Auth/AuthUser'
+import { X } from 'lucide-react'
 
-const AddOrderModal = ({ShowModal,setShowModal,order,setorder,isRefresh,setisRefresh}) => {
+const AddOrderModal = ({ ShowModal, setShowModal, order, setorder, isRefresh, setisRefresh }) => {
 
-if(!ShowModal){
-  return null
-}
-
-   
-
-
-   const {https}=AuthUser()
-
-   const id = order?._id
-
-   const savedata = () =>{
+  if (!ShowModal) {
+    return null
+  }
 
 
-     if(id){
-
-      https.put(`/order/update/${id}`,{...order})
-      .then((res)=>{
-
-                   console.log(res.data);
-                    setIsRefresh(isRefersh + 1);
-                    setShowModal(false);
-
-      })
-
-       setShowModal(false);
-
-     }
 
 
-     else{
+  const { https } = AuthUser()
 
-    https.post("/order/store",order)
+  const id = order?._id
 
-    .then((res)=>{
-      console.log(data)
+  const savedata = () => {
 
-      setorder(res.data)
+
+    if (id) {
+
+      https.put(`/order/update/${id}`, { ...order })
+        .then((res) => {
+
+          console.log(res.data);
+          setIsRefresh(isRefresh + 1);
+          setShowModal(false);
+
+        })
+
+      setShowModal(false);
+
+    }
+
+
+    else {
+
+      https.post("/order/store", order)
+
+        .then((res) => {
+          console.log(data)
+
+          setorder(res.data)
+          setShowModal(false)
+
+          setisRefresh(isRefresh + 1)
+
+
+
+        })
+
       setShowModal(false)
 
-    setisRefresh(isRefresh+1)
-      
 
 
-    })
+    }
 
-    setShowModal(false)
-     
-
-
-     }    
-
-   }
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
 
-      {/* Modal */}
+
       <div className="w-full max-w-2xl rounded-xl bg-white shadow-xl">
 
-        {/* Header */}
+
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
 
           <div>
@@ -76,22 +77,19 @@ if(!ShowModal){
             </p>
           </div>
 
-          <button
-            onClick={() => setShowModal(false)}
-            className="rounded-lg px-3 py-1 text-xl text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-          >
-            ×
+          <button onClick={() => setShowModal(false)} className="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+            <X size={20} />
           </button>
 
         </div>
 
 
-        {/* Form */}
+
         <div className="p-6">
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
-            {/* Customer Name */}
+
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Customer Name
@@ -99,7 +97,7 @@ if(!ShowModal){
 
               <input
                 value={order.customer_name}
-                onChange={(e)=>setorder({...order,customer_name:e.target.value})}
+                onChange={(e) => setorder({ ...order, customer_name: e.target.value })}
                 type="text"
                 placeholder="Enter customer name"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
@@ -107,15 +105,15 @@ if(!ShowModal){
             </div>
 
 
-            {/* Product Name */}
+
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Product Name
               </label>
 
               <input
-               value={order.product_name}
-                onChange={(e)=>setorder({...order,product_name:e.target.value})}
+                value={order.product_name}
+                onChange={(e) => setorder({ ...order, product_name: e.target.value })}
                 type="text"
                 placeholder="Enter product name"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
@@ -123,15 +121,15 @@ if(!ShowModal){
             </div>
 
 
-            {/* Amount */}
+
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Amount
               </label>
 
               <input
-               value={order.amount}
-                onChange={(e)=>setorder({...order,amount:e.target.value})}
+                value={order.amount}
+                onChange={(e) => setorder({ ...order, amount: e.target.value })}
                 type="number"
                 placeholder="Enter amount"
                 className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
@@ -139,15 +137,15 @@ if(!ShowModal){
             </div>
 
 
-            {/* Status */}
+
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Status
               </label>
 
               <select
-               
-                onChange={(e)=>setorder({...order,status:e.target.value})}
+
+                onChange={(e) => setorder({ ...order, status: e.target.value })}
                 className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
               >
                 <option value="">Select Status</option>
@@ -159,7 +157,7 @@ if(!ShowModal){
             </div>
 
 
-            {/* Product Image */}
+
             <div className="sm:col-span-2">
 
               <label className="mb-2 block text-sm font-medium text-gray-700">
@@ -178,7 +176,7 @@ if(!ShowModal){
           </div>
 
 
-          
+
           <div className="mt-6 flex justify-end gap-3 border-t border-gray-200 pt-5">
 
             <button
@@ -191,7 +189,7 @@ if(!ShowModal){
 
             <button
 
-             onClick={savedata}
+              onClick={savedata}
               type="button"
               className="rounded-lg bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-purple-700"
             >

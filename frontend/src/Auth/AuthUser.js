@@ -16,7 +16,7 @@ export default function AuthUser() {
   });
 
   return {
-    http,
+    http, 
     https,
-  };
-}
+  };      
+}         
