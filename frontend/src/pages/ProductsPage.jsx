@@ -10,7 +10,7 @@ const ProductsPage = () => {
   const [isRefresh, setIsrefresh] = useState(0);
 
   const getproducts = async () => {
-    https
+    await https
       .get("/product/list")
       .then((res) => {
         setProducts(res.data);
@@ -23,9 +23,13 @@ const ProductsPage = () => {
 
   const [viewproduct, setViewProduct] = useState(null);
   const [editProduct, setEditProduct] = useState(null);
-  const [deleteProduct, setDeleteProduct] = useState(null);
+
   const [showModel, setShowModal] = useState(false);
 
+  const productdelete = async (id) => {
+    await https.delete(`/product/delete/${id}`);
+    setIsrefresh(isRefresh + 1);
+  };
   useEffect(() => {
     getproducts();
   }, [isRefresh]);
@@ -121,7 +125,10 @@ const ProductsPage = () => {
                           Edit
                         </button>
 
-                        <button className="flex items-center gap-1.5 rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100">
+                        <button
+                          className="flex items-center gap-1.5 rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-100"
+                          onClick={() => productdelete(Product._id)}
+                        >
                           <Trash2 size={15} />
                           Delete
                         </button>

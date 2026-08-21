@@ -2,7 +2,12 @@ import { ImagePlus, UploadCloud, X } from "lucide-react";
 import React, { useState } from "react";
 import AuthUser from "../../src/Auth/AuthUser";
 
-const AddproductMoadal = ({ isRefresh, setShowModal, showModel }) => {
+const AddproductMoadal = ({
+  isRefresh,
+  setIsrefresh,
+  setShowModal,
+  showModel,
+}) => {
   const [productData, setProductData] = useState({
     product_name: "",
     product_description: "",
@@ -13,7 +18,7 @@ const AddproductMoadal = ({ isRefresh, setShowModal, showModel }) => {
   const handledSaveProduct = () => {
     https.post("/product/store", productData).then((res) => {
       console.log(res.data);
-      console.log(isRefresh + 1);
+      setIsrefresh(isRefresh + 1);
       setShowModal(false);
     });
   };
