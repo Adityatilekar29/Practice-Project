@@ -225,13 +225,7 @@ const OrdersPage = () => {
 
                     <div className="flex items-center justify-center gap-1">
 
-                      <button
-                        title="View"
-                        className="flex items-center gap-1 rounded-md bg-green-50 px-2 py-1.5 text-xs font-medium text-green-600 transition hover:bg-green-100"
-                      >
-                        <Eye size={14} />
-                        View
-                      </button>
+                      
 
 
                       <button
