@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 import { Eye, SquarePen, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 import AddOrderModal from "../../Modals/AddOrderModal";
-=======
-import { SquarePen, Trash2 } from "lucide-react";
-import React from "react";
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
 
 const OrdersPage = () => {
 
@@ -33,7 +28,6 @@ const OrdersPage = () => {
 
 
   return (
-<<<<<<< HEAD
     <div className="page-content min-h-screen w-full bg-gray-50 p-4 sm:p-6">
 
       {/* Heading */}
@@ -43,12 +37,6 @@ const OrdersPage = () => {
           <h2 className="text-xl font-bold text-gray-800">
             Orders
           </h2>
-=======
-    <div className="page-content w-full min-h-screen bg-gray-50 p-6">
-      <div className="heading flex items-center justify-between rounded-xl bg-white px-6 py-4  shadow border border-gray-200">
-        <div>
-          <h2 className="text-xl font-bold text-gray-800">Order</h2>
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
 
           <p className="mt-1 text-sm text-gray-500">
             Manage all orders from here
@@ -60,7 +48,6 @@ const OrdersPage = () => {
         </button>
       </div>
 
-<<<<<<< HEAD
 
       {/* Order List */}
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -80,16 +67,6 @@ const OrdersPage = () => {
 
             <thead className="border-b border-gray-200 bg-gray-50">
 
-=======
-      <div className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow">
-        <div className="border-b border-gray-200 px-6 py-4">
-          <h3 className="font-semibold text-gray-800">Order List</h3>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table hover responsive className="mb-0">
-            <thead className="bg-gray-50">
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
               <tr>
 
                 <th className="px-4 py-4 text-sm font-semibold text-gray-600">
@@ -108,30 +85,21 @@ const OrdersPage = () => {
                   Image
                 </th>
 
-<<<<<<< HEAD
                 <th className="px-4 py-4 text-center text-sm font-semibold text-gray-600">
                   Amount
                 </th>
 
                 <th className="px-4 py-4 text-center text-sm font-semibold text-gray-600">
-=======
-                <th className="px-6 py-4 text-sm text-center font-semibold text-gray-600">
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
                   Status
                 </th>
 
                 <th className="px-4 py-4 text-center text-sm font-semibold text-gray-600">
                   Action
                 </th>
-<<<<<<< HEAD
-
-=======
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
               </tr>
 
             </thead>
 
-<<<<<<< HEAD
 
             <tbody className="divide-y divide-gray-100">
 
@@ -146,11 +114,6 @@ const OrdersPage = () => {
 
                 {/* Customer */}
                 <td className="px-4 py-4">
-=======
-            <tbody>
-              <tr>
-                <td className="px-6 py-4 text-center">1</td>
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
 
                   <div className="font-medium text-gray-800">
                     Aditya Bhore
@@ -158,7 +121,6 @@ const OrdersPage = () => {
 
                 </td>
 
-<<<<<<< HEAD
 
                 {/* Product */}
                 <td className="px-4 py-4 text-sm text-gray-600">
@@ -189,21 +151,10 @@ const OrdersPage = () => {
 
                   <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
                     Completed
-=======
-                <td className="px-6 py-4 text-center text-gray-600">Condom</td>
-                <td className="px-6 py-4 text-center text-gray-600">🤤</td>
-
-                <td className="px-6 py-4 text-center text-gray-600">30</td>
-
-                <td className="px-6 py-4 text-center">
-                  <span className="rounded-md bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                    Active
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
                   </span>
 
                 </td>
 
-<<<<<<< HEAD
 
                 {/* Actions */}
                 <td className="px-3 py-4">
@@ -224,12 +175,6 @@ const OrdersPage = () => {
                       className="flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1.5 text-xs font-medium text-blue-600 transition hover:bg-blue-100"
                     >
                       <SquarePen size={14} />
-=======
-                <td className="px-6 py-4 text-center">
-                  <div className="flex items-center justify-center gap-2">
-                    <button className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100">
-                      <SquarePen size={15} />
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
                       Edit
                     </button>
 
@@ -246,20 +191,16 @@ const OrdersPage = () => {
                 </td>
 
               </tr>
-<<<<<<< HEAD
 
 
 
 
 
-=======
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
             </tbody>
           </table>
         </div>
 
       </div>
-<<<<<<< HEAD
 
 
 
@@ -286,10 +227,3 @@ const OrdersPage = () => {
 };
 
 export default OrdersPage;
-=======
-    </div>
-  );
-};
-
-export default OrdersPage;
->>>>>>> 0c809d10af7213bc0ab31ee86af85bab61bff62a
