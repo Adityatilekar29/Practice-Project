@@ -186,7 +186,7 @@ const OrdersPage = () => {
 
 
                  
-                  <td className="px-4 py-4 text-sm text-gray-600">
+                  <td className=" font-medium px-13 py-4 text-sm text-gray-800">
                     {data.product_name}
                   </td>
 
@@ -197,7 +197,7 @@ const OrdersPage = () => {
                     <img
                       src={IMG_URL + "/" + data.order_image}
                       alt="order"
-                      className="mx-auto h-10 w-10 rounded-lg border border-gray-200 object-cover"
+                      className="mx-auto h-15 w-15 rounded-lg border border-gray-200 object-cover"
 
                     />
 
