@@ -27,6 +27,7 @@ const OrdersPage = () => {
   const handleAdd = () => {
 
     setShowModal(true)
+    setorder({})
 
   }
 
@@ -63,6 +64,15 @@ const OrdersPage = () => {
         console.log(err)
         console.log("Error in members")
       })
+
+  }
+
+
+ const  handleUpdate=(data)=>{
+
+  setorder(data)
+
+       setShowModal(true)
 
   }
 
@@ -225,6 +235,7 @@ const OrdersPage = () => {
 
 
                       <button
+                      onClick={()=>handleUpdate(data)}
                         title="Edit"
                         className="flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1.5 text-xs font-medium text-blue-600 transition hover:bg-blue-100"
                       >
