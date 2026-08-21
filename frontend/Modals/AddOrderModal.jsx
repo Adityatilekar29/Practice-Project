@@ -12,7 +12,28 @@ if(!ShowModal){
 
    const {https}=AuthUser()
 
+   const id = order?._id
+
    const savedata = () =>{
+
+
+     if(id){
+
+      https.put(`/order/update/${id}`,{...order})
+      .then((res)=>{
+
+                   console.log(res.data);
+                    setIsRefresh(isRefersh + 1);
+                    setShowModal(false);
+
+      })
+
+       setShowModal(false);
+
+     }
+
+
+     else{
 
     https.post("/order/store",order)
 
@@ -32,7 +53,7 @@ if(!ShowModal){
      
 
 
-         
+     }    
 
    }
 
@@ -174,7 +195,7 @@ if(!ShowModal){
               type="button"
               className="rounded-lg bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-purple-700"
             >
-              Add Order
+              {id ? "Update Order" : "Add Order"}
             </button>
 
           </div>

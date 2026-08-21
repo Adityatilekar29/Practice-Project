@@ -137,7 +137,7 @@ const deleted = async(req,res)=>{
 
         const deletedata =await ordermodel.deleteOne({_id:id})
 
-        return req.json(deletedata)
+        return res.json(deletedata)
         
     } catch (error) {
 
