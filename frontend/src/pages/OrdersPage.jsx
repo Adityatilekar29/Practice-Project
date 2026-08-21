@@ -32,19 +32,19 @@ const OrdersPage = () => {
   }
 
 
-  
+
 
 
 
   const { https } = AuthUser()
 
 
- const handledDelete=(id)=>{
+  const handledDelete = (id) => {
 
-       https.delete(`/order/delete/${id}`)
-       .then((res)=>{
-        setisRefresh(isRefresh+1)
-       }) .catch((err) => {
+    https.delete(`/order/delete/${id}`)
+      .then((res) => {
+        setisRefresh(isRefresh + 1)
+      }).catch((err) => {
         console.log(err);
       });
 
@@ -57,7 +57,7 @@ const OrdersPage = () => {
 
         console.log(res.data)
         setorderdata(res.data)
-        setisRefresh(isRefresh+1)
+        setisRefresh(isRefresh + 1)
 
 
       }).catch((err) => {
@@ -68,11 +68,11 @@ const OrdersPage = () => {
   }
 
 
- const  handleUpdate=(data)=>{
+  const handleUpdate = (data) => {
 
-  setorder(data)
+    setorder(data)
 
-       setShowModal(true)
+    setShowModal(true)
 
   }
 
@@ -110,10 +110,10 @@ const OrdersPage = () => {
       </div>
 
 
-      {/* Order List */}
+     
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
 
-        {/* Table Header */}
+        
         <div className="border-b border-gray-200 px-5 py-4 sm:px-6">
           <h3 className="font-semibold text-gray-800">
             Order List
@@ -121,7 +121,7 @@ const OrdersPage = () => {
         </div>
 
 
-        {/* Table */}
+        
         <div className="w-full">
 
           <table className="w-full text-left">
@@ -169,13 +169,13 @@ const OrdersPage = () => {
 
                 <tr className="transition hover:bg-gray-50" key={index}>
 
-                  {/* ID */}
+                 
                   <td className="px-4 py-4 text-sm font-medium text-gray-700">
-                    {index+1}
+                    {index + 1}
                   </td>
 
 
-                  {/* Customer */}
+                 
                   <td className="px-4 py-4">
 
                     <div className="font-medium text-gray-800">
@@ -185,13 +185,13 @@ const OrdersPage = () => {
                   </td>
 
 
-                  {/* Product */}
+                 
                   <td className="px-4 py-4 text-sm text-gray-600">
                     {data.product_name}
                   </td>
 
 
-                  {/* Image */}
+                  
                   <td className="px-4 py-4 text-center">
 
                     <img
@@ -204,32 +204,34 @@ const OrdersPage = () => {
                   </td>
 
 
-                  {/* Amount */}
+                  
                   <td className="px-4 py-4 text-center text-sm font-semibold text-gray-700">
                     {data.amount}
                   </td>
 
 
-                  {/* Status */}
+                  
                   <td className="px-4 py-4 text-center">
 
-                    <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                    <span className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${data.status === "Pending" ? "bg-orange-100 text-orange-700" : data.status === "Processing" ? "bg-blue-100 text-blue-700" : data.status === "Completed" ? "bg-green-100 text-green-700" : data.status === "Cancelled" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}`}>
+
                       {data.status}
+
                     </span>
 
                   </td>
 
 
-                  {/* Actions */}
+                  
                   <td className="px-3 py-4">
 
                     <div className="flex items-center justify-center gap-1">
 
-                      
+
 
 
                       <button
-                      onClick={()=>handleUpdate(data)}
+                        onClick={() => handleUpdate(data)}
                         title="Edit"
                         className="flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1.5 text-xs font-medium text-blue-600 transition hover:bg-blue-100"
                       >
@@ -239,7 +241,7 @@ const OrdersPage = () => {
 
 
                       <button
-                      onClick={()=>handledDelete(data._id)}
+                        onClick={() => handledDelete(data._id)}
                         title="Delete"
                         className="flex items-center gap-1 rounded-md bg-red-50 px-2 py-1.5 text-xs font-medium text-red-600 transition hover:bg-red-100"
                       >
