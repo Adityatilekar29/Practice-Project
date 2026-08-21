@@ -1,19 +1,27 @@
 import { Eye, SquarePen, Trash2 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddOrderModal from "../../Modals/AddOrderModal";
+import AuthUser from "../Auth/AuthUser";
+import { IMG_URL } from "../helper/url_helper";
+
 
 const OrdersPage = () => {
 
+  const [orderdata, setorderdata] = useState([])
+  const [isRefresh, setisRefresh] = useState(0)
+  const [ShowModal, setShowModal] = useState(false)
+
+
+
   const [order, setorder] = useState({
-            customer_name:"",
-            product_name:"",
-            product_image:"",
-            amount:"",
-            status:"",
+    customer_name: "",
+    product_name: "",
+    product_image: "",
+    amount: "",
+    status: "",
   })
 
 
-  const [ShowModal, setShowModal] = useState(false)
 
 
   const handleAdd = () => {
@@ -21,6 +29,49 @@ const OrdersPage = () => {
     setShowModal(true)
 
   }
+
+
+  
+
+
+
+  const { https } = AuthUser()
+
+
+ const handledDelete=(id)=>{
+
+       https.delete(`/order/delete/${id}`)
+       .then((res)=>{
+        setisRefresh(isRefresh+1)
+       }) .catch((err) => {
+        console.log(err);
+      });
+
+  }
+
+  const getorder = async () => {
+
+    await https.get("/order/list")
+      .then((res) => {
+
+        console.log(res.data)
+        setorderdata(res.data)
+        setisRefresh(isRefresh+1)
+
+
+      }).catch((err) => {
+        console.log(err)
+        console.log("Error in members")
+      })
+
+  }
+
+
+  useEffect(() => {
+
+    getorder()
+
+  }, [isRefresh])
 
 
 
@@ -102,96 +153,100 @@ const OrdersPage = () => {
 
 
             <tbody className="divide-y divide-gray-100">
-
-              {/* First Row */}
-              <tr className="transition hover:bg-gray-50">
-
-                {/* ID */}
-                <td className="px-4 py-4 text-sm font-medium text-gray-700">
-                  1
-                </td>
+              {orderdata.length > 0 && orderdata.map((data, key) => (
 
 
-                {/* Customer */}
-                <td className="px-4 py-4">
 
-                  <div className="font-medium text-gray-800">
-                    Aditya Bhore
-                  </div>
+                <tr className="transition hover:bg-gray-50" key={key}>
 
-                </td>
-
-
-                {/* Product */}
-                <td className="px-4 py-4 text-sm text-gray-600">
-                  Premium T-Shirt
-                </td>
+                  {/* ID */}
+                  <td className="px-4 py-4 text-sm font-medium text-gray-700">
+                    1
+                  </td>
 
 
-                {/* Image */}
-                <td className="px-4 py-4 text-center">
+                  {/* Customer */}
+                  <td className="px-4 py-4">
 
-                  <img
-                    src="https://via.placeholder.com/45"
-                    alt="Product"
-                    className="mx-auto h-10 w-10 rounded-lg border border-gray-200 object-cover"
-                  />
+                    <div className="font-medium text-gray-800">
+                      {data.customer_name}
+                    </div>
 
-                </td>
+                  </td>
 
 
-                {/* Amount */}
-                <td className="px-4 py-4 text-center text-sm font-semibold text-gray-700">
-                  ₹999
-                </td>
+                  {/* Product */}
+                  <td className="px-4 py-4 text-sm text-gray-600">
+                    {data.product_name}
+                  </td>
 
 
-                {/* Status */}
-                <td className="px-4 py-4 text-center">
+                  {/* Image */}
+                  <td className="px-4 py-4 text-center">
 
-                  <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
-                    Completed
-                  </span>
+                    <img
+                      src={IMG_URL + "/" + data.order_image}
+                      alt="order"
+                      className="mx-auto h-10 w-10 rounded-lg border border-gray-200 object-cover"
 
-                </td>
+                    />
 
-
-                {/* Actions */}
-                <td className="px-3 py-4">
-
-                  <div className="flex items-center justify-center gap-1">
-
-                    <button
-                      title="View"
-                      className="flex items-center gap-1 rounded-md bg-green-50 px-2 py-1.5 text-xs font-medium text-green-600 transition hover:bg-green-100"
-                    >
-                      <Eye size={14} />
-                      View
-                    </button>
+                  </td>
 
 
-                    <button
-                      title="Edit"
-                      className="flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1.5 text-xs font-medium text-blue-600 transition hover:bg-blue-100"
-                    >
-                      <SquarePen size={14} />
-                      Edit
-                    </button>
+                  {/* Amount */}
+                  <td className="px-4 py-4 text-center text-sm font-semibold text-gray-700">
+                    {data.amount}
+                  </td>
 
 
-                    <button
-                      title="Delete"
-                      className="flex items-center gap-1 rounded-md bg-red-50 px-2 py-1.5 text-xs font-medium text-red-600 transition hover:bg-red-100"
-                    >
-                      <Trash2 size={14} />
-                      Delete
-                    </button>
-                  </div>
+                  {/* Status */}
+                  <td className="px-4 py-4 text-center">
 
-                </td>
+                    <span className="inline-flex rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
+                      {data.status}
+                    </span>
 
-              </tr>
+                  </td>
 
+
+                  {/* Actions */}
+                  <td className="px-3 py-4">
+
+                    <div className="flex items-center justify-center gap-1">
+
+                      <button
+                        title="View"
+                        className="flex items-center gap-1 rounded-md bg-green-50 px-2 py-1.5 text-xs font-medium text-green-600 transition hover:bg-green-100"
+                      >
+                        <Eye size={14} />
+                        View
+                      </button>
+
+
+                      <button
+                        title="Edit"
+                        className="flex items-center gap-1 rounded-md bg-blue-50 px-2 py-1.5 text-xs font-medium text-blue-600 transition hover:bg-blue-100"
+                      >
+                        <SquarePen size={14} />
+                        Edit
+                      </button>
+
+
+                      <button
+                      onClick={()=>handledDelete(data._id)}
+                        title="Delete"
+                        className="flex items-center gap-1 rounded-md bg-red-50 px-2 py-1.5 text-xs font-medium text-red-600 transition hover:bg-red-100"
+                      >
+                        <Trash2 size={14} />
+                        Delete
+                      </button>
+                    </div>
+
+                  </td>
+
+                </tr>
+              ))}
 
 
 
@@ -211,6 +266,8 @@ const OrdersPage = () => {
         setShowModal={setShowModal}
         order={order}
         setorder={setorder}
+        isRefresh={isRefresh}
+        setisRefresh={setisRefresh}
 
 
       />

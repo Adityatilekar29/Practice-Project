@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const ordermodel = mongoose.model("order",{
 
@@ -19,12 +19,10 @@ const ordermodel = mongoose.model("order",{
   },
 
   status: {
-    type: String,
-    enum: ["Pending", "Completed", "Cancelled"],
-    
+    type: String,    
   },
 
-  product_image: {
+  order_image: {
     type: String
   }
 
