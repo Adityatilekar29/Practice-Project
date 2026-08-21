@@ -9,6 +9,7 @@ const UserModal = ({ showModal, setShowModal, addUser, setAddUser, setIsRefresh 
     const { https } = AuthUser();
 
     const addData = async (e) => {
+        
         e.preventDefault();
 
         if (addUser._id) {
@@ -64,7 +65,7 @@ const UserModal = ({ showModal, setShowModal, addUser, setAddUser, setIsRefresh 
                         </div>
 
                         <button
-                            onClick={() => setShowModal(false)}
+                            onClick={() => { setShowModal(false); setAddUser({}) }}
                             className="rounded-lg p-2 text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
                         >
                             <X size={20} />
@@ -195,7 +196,7 @@ const UserModal = ({ showModal, setShowModal, addUser, setAddUser, setIsRefresh 
                     <div className="flex items-center justify-end gap-2 border-t border-gray-200 px-5 py-3">
 
                         <button
-                            onClick={() => setShowModal(false)}
+                            onClick={() => { setShowModal(false); setAddUser({}) }}
                             className="rounded border border-gray-300 px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-100"
                         >
                             Cancel
