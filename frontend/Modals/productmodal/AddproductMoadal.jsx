@@ -15,20 +15,22 @@ const AddproductMoadal = ({
     product_image: null,
   });
   const { https } = AuthUser();
-  const handledSaveProduct = () => {
-    https.post("/product/store", productData).then((res) => {
+
+  const handleAddProduct = () => {
+    https.post("product/store", productData).then((res) => {
       console.log(res.data);
       setIsrefresh(isRefresh + 1);
       setShowModal(false);
     });
   };
+
   return (
     <>
       {showModel && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
           <div className="w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl">
             {/* Header */}
-            <div className="flex items-center justify-between bg-indigo-600 px-8 py-5">
+            <div className="flex items-center justify-between bg-indigo-600 px-8 ">
               <div>
                 <h2 className="text-2xl font-bold text-white">Add Product</h2>
                 <p className="mt-1 text-sm text-indigo-100">
@@ -77,7 +79,7 @@ const AddproductMoadal = ({
                   name="product_prize"
                   placeholder="Enter product price"
                   className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
-                  onClick={(e) =>
+                  onChange={(e) =>
                     setProductData({
                       ...productData,
                       product_prize: e.target.value,
@@ -139,7 +141,7 @@ const AddproductMoadal = ({
 
               <button
                 className="rounded-xl bg-indigo-600 px-6 py-2.5 font-semibold text-white hover:bg-indigo-700"
-                onClick={handledSaveProduct}
+                onClick={handleAddProduct}
               >
                 Add Product
               </button>

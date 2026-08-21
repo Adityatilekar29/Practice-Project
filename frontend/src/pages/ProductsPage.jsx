@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import AuthUser from "../Auth/AuthUser";
 import AddproductMoadal from "../../Modals/productmodal/AddproductMoadal";
 import { IMG_URL } from "../helper/url_helper";
+import EditModel from "../../Modals/productmodal/EditModel";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
@@ -21,11 +22,9 @@ const ProductsPage = () => {
       });
   };
 
-  const [viewproduct, setViewProduct] = useState(null);
-  const [editProduct, setEditProduct] = useState(null);
-
   const [showModel, setShowModal] = useState(false);
 
+  const [editProduct, setEditProduct] = useState(null);
   const productdelete = async (id) => {
     await https.delete(`/product/delete/${id}`);
     setIsrefresh(isRefresh + 1);
@@ -115,12 +114,10 @@ const ProductsPage = () => {
 
                     <td className="px-6 py-4 text-center">
                       <div className="flex items-center justify-center gap-2">
-                        <button className="flex items-center gap-1.5 rounded bg-green-50 px-3 py-1.5 text-sm font-medium text-green-600 hover:bg-green-100">
-                          <Eye size={15} />
-                          View
-                        </button>
-
-                        <button className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100">
+                        <button
+                          onClick={() => setEditProduct(Product)}
+                          className="flex items-center gap-1.5 rounded bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-600 hover:bg-blue-100"
+                        >
                           <SquarePen size={15} />
                           Edit
                         </button>
@@ -147,6 +144,14 @@ const ProductsPage = () => {
         isRefresh={isRefresh}
         setIsrefresh={setIsrefresh}
       />
+      {editProduct && (
+        <EditModel
+          product={editProduct}
+          isRefresh={isRefresh}
+          setIsrefresh={setIsrefresh}
+          setEditProduct={setEditProduct}
+        />
+      )}
     </>
   );
 };
